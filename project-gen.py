@@ -13,6 +13,11 @@ def main():
     print("This is auto-generation script for c++ opensource project")
     print("You should input informations matched with your github repository")
 
+    # Create empty directories
+    os.mkdir("Resources")
+    os.mkdir("Includes")
+
+    # Get project informations from prompt
     project_name = input("Please input project name: ")
     if project_name == "":
         project_name = default_project_name
@@ -23,6 +28,7 @@ def main():
     if nickname == "":
         nickname = default_nickname
 
+    # Modify predefined strings to given informations from prompt recursively
     for dname, _, files in os.walk(os.getcwd()):
         for fname in files:
             fpath = os.path.join(dname, fname)
@@ -40,6 +46,7 @@ def main():
                     with open(fpath, "w", encoding="utf-8") as f:
                         f.write(content)
 
+    # Delete this auto-generation script or not
     while True:
         choice = input("Remove this script? [Y/N]").lower()
         if choice == 'y':
